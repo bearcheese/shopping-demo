@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="createManufacturerTable" author="bearcheese">
+        <createTable tableName="manufacturer">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <constraints primaryKey="true" primaryKeyName="manufacturer_id_pk"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="head_office" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createProductTable" author="bearcheese">
+        <createTable tableName="product">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <constraints primaryKey="true" primaryKeyName="product_id_pk"/>
+            </column>
+            <column name="itemid" type="uuid">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="decimal(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="manufacturer_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="addForeignKeyConstraintToProductTableManufacturerIdColumn" author="bearcheese">
+        <addForeignKeyConstraint baseColumnNames="manufacturer_id"
+                                 baseTableName="product"
+                                 constraintName="product_manufacturer_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="manufacturer"/>
+    </changeSet>
+
+    <changeSet id="addIndexToProductTableManufacturerIdColumn" author="bearcheese">
+        <createIndex tableName="product" indexName="product_id_idx">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="createTableProperty" author="bearcheese">
+        <createTable tableName="property">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+                <constraints primaryKey="true" primaryKeyName="property_id_pk"/>
+            </column>
+            <column name="name" type="varchar(30)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="addForeignKeyConstraintToPropertyTableProductIdColumn" author="bearcheese">
+        <addForeignKeyConstraint baseColumnNames="product_id"
+                                 baseTableName="property"
+                                 constraintName="property_product_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="product"/>
+    </changeSet>
+
+</databaseChangeLog>
