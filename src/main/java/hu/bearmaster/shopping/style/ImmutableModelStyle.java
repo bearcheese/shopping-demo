@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonSerialize
 @JsonDeserialize
 @Value.Style(
-        get = {"is*", "get*"}, //jOOQ will look for pojo style getters
+        get = {"is*", "get*"},
         init = "*",
         typeAbstract = {"Abstract*"},
         typeImmutable = "Immutable*",

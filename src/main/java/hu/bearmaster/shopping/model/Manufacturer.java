@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Value.Immutable
+@Value.Modifiable
 @JsonSerialize(as = ImmutableManufacturer.class)
 @JsonDeserialize(as = ImmutableManufacturer.class)
 public interface Manufacturer {
@@ -18,7 +19,7 @@ public interface Manufacturer {
 
     String getHeadOffice();
 
-    static Builder builder(){
+    static Builder builder() {
         return new Builder();
     }
 

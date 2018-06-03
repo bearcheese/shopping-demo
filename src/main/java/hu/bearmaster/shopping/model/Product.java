@@ -10,6 +10,7 @@ import org.immutables.value.Value;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+@Value.Modifiable
 @Value.Immutable
 @JsonSerialize(as = ImmutableProduct.class)
 @JsonDeserialize(as = ImmutableProduct.class)
@@ -29,7 +30,7 @@ public interface Product {
 
     Set<Property> getProperties();
 
-    static Builder builder(){
+    static Builder builder() {
         return new Builder();
     }
 

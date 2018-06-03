@@ -1,0 +1,21 @@
+{
+  "itemId": "947673f5-b80b-4a5b-a566-40d3f906177d",
+  "name": "New test product",
+  "category": "Test",
+  "price": 10.55,
+  "manufacturer": {
+    "id": "2",
+    "name": "Duplicate Corp.",
+    "headOffice": "Null City"
+  },
+  "properties": [
+    {
+      "name": "color",
+      "value": "red"
+    },
+    {
+      "name": "shape",
+      "value": "sphere"
+    }
+  ]
+}
