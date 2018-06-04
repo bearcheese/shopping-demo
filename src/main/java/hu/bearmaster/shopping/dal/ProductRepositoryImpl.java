@@ -68,7 +68,7 @@ class ProductRepositoryImpl implements ProductRepository {
         ProductRecord productRecord = context.insertInto(SHOPPINGDEMO.PRODUCT,
                 SHOPPINGDEMO.PRODUCT.CATEGORY, SHOPPINGDEMO.PRODUCT.ITEMID, SHOPPINGDEMO.PRODUCT.MANUFACTURER_ID,
                 SHOPPINGDEMO.PRODUCT.NAME, SHOPPINGDEMO.PRODUCT.PRICE)
-                .values(product.getCategory(), product.getItemId().toString(), manufacturerId, product.getName(), product.getPrice())
+                .values(product.getCategory(), product.getItemId(), manufacturerId, product.getName(), product.getPrice())
                 .returning(SHOPPINGDEMO.PRODUCT.ID)
                 .fetchOne();
 

@@ -2,7 +2,6 @@ package hu.bearmaster.shopping.dal;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.UUID;
 
 import org.jooq.Record;
 import org.jooq.RecordMapper;
@@ -42,7 +41,7 @@ public class MyRecordMapperProvider implements RecordMapperProvider {
         Manufacturer manufacturer = record.into(Manufacturer.class);
         return Product.builder()
                 .id(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.ID))
-                .itemId(UUID.fromString(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.ITEMID)))
+                .itemId(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.ITEMID))
                 .category(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.CATEGORY))
                 .name(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.NAME))
                 .price(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.PRICE))

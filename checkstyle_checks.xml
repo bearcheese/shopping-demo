@@ -12,10 +12,6 @@
         <property name="basedir" value="${basedir}"/>
     -->
 
-    <metadata name="com.atlas-sw.eclipse" value="I like Sydney"/>
-
-    <property name="cacheFile" value="${checkstyle.cache.file}"/>
-
     <property name="severity" value="error"/>
 
     <property name="fileExtensions" value="java, properties, xml, vm, g, g4, dtd"/>
@@ -210,12 +206,12 @@
             <property name="tokens" value="LITERAL_CATCH"/>
             <property name="tokens" value="LITERAL_ELSE"/>
             <property name="tokens" value="LITERAL_FINALLY"/>
-            <property name="tokens" value="LITERAL_IF"/>
             <property name="tokens" value="LITERAL_TRY"/>
             <property name="option" value="alone"/>
         </module>
         <module name="RightCurly">
             <property name="tokens" value="LITERAL_DO"/>
+            <property name="tokens" value="LITERAL_IF"/>
             <property name="option" value="same"/>
         </module>
 
