@@ -19,7 +19,7 @@ import hu.bearmaster.shopping.model.Manufacturer;
 import hu.bearmaster.shopping.model.Product;
 import hu.bearmaster.shopping.model.Property;
 
-class ProductRepositoryImpl implements ProductRepository {
+class ProductRepositoryImpl {
 
     private final DSLContext context;
 
@@ -27,7 +27,6 @@ class ProductRepositoryImpl implements ProductRepository {
         this.context = context;
     }
 
-    @Override
     public Optional<Product> findById(Long productId) {
         Optional<Product> product = context.select()
                 .from(SHOPPINGDEMO.PRODUCT)
@@ -46,12 +45,10 @@ class ProductRepositoryImpl implements ProductRepository {
         return product;
     }
 
-    @Override
     public List<Product> findAll() {
         return null;
     }
 
-    @Override
     public Product save(Product product) {
         Long manufacturerId;
         if (product.getManufacturer().getId().isPresent()) {

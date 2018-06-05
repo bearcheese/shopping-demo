@@ -1,5 +1,7 @@
 package hu.bearmaster.shopping.dal;
 
+import static hu.bearmaster.shopping.dal.jooq.Shoppingdemo.SHOPPINGDEMO;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -11,10 +13,7 @@ import org.jooq.impl.DefaultRecordMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import hu.bearmaster.shopping.dal.jooq.Shoppingdemo;
 import hu.bearmaster.shopping.model.Manufacturer;
-import hu.bearmaster.shopping.model.ModifiableManufacturer;
-import hu.bearmaster.shopping.model.ModifiableProperty;
 import hu.bearmaster.shopping.model.Product;
 import hu.bearmaster.shopping.model.Property;
 
@@ -33,25 +32,30 @@ public class MyRecordMapperProvider implements RecordMapperProvider {
 
     private static Manufacturer mapManufacturerRecord(Record record) {
         return Manufacturer.builder()
-                .from(record.into(ModifiableManufacturer.class))
+                .id(record.get(SHOPPINGDEMO.MANUFACTURER.ID))
+                .name(record.get(SHOPPINGDEMO.MANUFACTURER.NAME))
+                .headOffice(record.get(SHOPPINGDEMO.MANUFACTURER.HEAD_OFFICE))
                 .build();
     }
 
     private static Product mapProductRecord(Record record) {
         Manufacturer manufacturer = record.into(Manufacturer.class);
         return Product.builder()
-                .id(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.ID))
-                .itemId(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.ITEMID))
-                .category(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.CATEGORY))
-                .name(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.NAME))
-                .price(record.get(Shoppingdemo.SHOPPINGDEMO.PRODUCT.PRICE))
+                .id(record.get(SHOPPINGDEMO.PRODUCT.ID))
+                .itemId(record.get(SHOPPINGDEMO.PRODUCT.ITEMID))
+                .category(record.get(SHOPPINGDEMO.PRODUCT.CATEGORY))
+                .name(record.get(SHOPPINGDEMO.PRODUCT.NAME))
+                .price(record.get(SHOPPINGDEMO.PRODUCT.PRICE))
                 .manufacturer(manufacturer)
                 .build();
     }
 
     private static Property mapPropertyRecord(Record record) {
         return Property.builder()
-                .from(record.into(ModifiableProperty.class))
+                .id(record.get(SHOPPINGDEMO.PROPERTY.ID))
+                .name(record.get(SHOPPINGDEMO.PROPERTY.NAME))
+                .value(record.get(SHOPPINGDEMO.PROPERTY.VALUE))
+                .productId(record.get(SHOPPINGDEMO.PROPERTY.PRODUCT_ID))
                 .build();
     }
 
