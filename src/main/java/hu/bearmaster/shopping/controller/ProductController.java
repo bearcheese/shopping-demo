@@ -1,9 +1,9 @@
 package hu.bearmaster.shopping.controller;
 
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import hu.bearmaster.shopping.dal.ManufacturerRepository;
@@ -23,19 +23,24 @@ public class ProductController {
         this.productRepository = productRepository;
     }
 
+    @GetMapping("products")
+    public List<? extends Product> getProducts() {
+        return productRepository.findAll();
+    }
+
     @GetMapping("products/{id}")
     public Product getProduct(@PathVariable Long id) {
         return productRepository.findById(id).orElse(null);
     }
 
-    @PostMapping("products")
-    public Long newProduct(@RequestBody Product product) {
-        return productRepository.save(product).getId().get();
+    @GetMapping("manufacturers")
+    public List<? extends Manufacturer> getManufacturers() {
+        return manufacturerRepository.findAll();
     }
 
-    @GetMapping("manufacturer/{id}")
+    @GetMapping("manufacturers/{id}")
     public Manufacturer getManufacturer(@PathVariable Long id) {
-        return manufacturerRepository.getOne(id);
+        return manufacturerRepository.findById(id).orElse(null);
     }
 
 }

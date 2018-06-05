@@ -1,11 +1,9 @@
 package hu.bearmaster.shopping.model;
 
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
-
-import javax.persistence.Table;
 
 import org.immutables.value.Value;
 
@@ -17,7 +15,6 @@ import hu.bearmaster.shopping.model.annotation.InjectGeneratedValue;
 import hu.bearmaster.shopping.model.annotation.InjectId;
 import hu.bearmaster.shopping.model.annotation.InjectJoinColumn;
 import hu.bearmaster.shopping.model.annotation.InjectManyToOne;
-import hu.bearmaster.shopping.model.annotation.InjectOneToMany;
 
 @InjectEntity
 @Table(name = "product")
@@ -42,9 +39,6 @@ public interface Product {
     @InjectManyToOne(targetEntity = ImmutableManufacturer.class)
     @InjectJoinColumn(name = "manufacturer_id", nullable = false)
     Manufacturer getManufacturer();
-
-    @InjectOneToMany(mappedBy = "productId", targetEntity = ImmutableProperty.class)
-    Set<Property> getProperties();
 
     static Builder builder() {
         return new Builder();
