@@ -1,4 +1,4 @@
-package hu.bearmaster.shopping.dal;
+package hu.bearmaster.shopping.dal.jooq;
 
 import static hu.bearmaster.shopping.dal.jooq.Shoppingdemo.SHOPPINGDEMO;
 
@@ -19,11 +19,11 @@ import hu.bearmaster.shopping.model.Manufacturer;
 import hu.bearmaster.shopping.model.Product;
 import hu.bearmaster.shopping.model.Property;
 
-class ProductRepositoryImpl {
+class JooqProductRepositoryImpl {
 
     private final DSLContext context;
 
-    public ProductRepositoryImpl(DSLContext context) {
+    public JooqProductRepositoryImpl(DSLContext context) {
         this.context = context;
     }
 

@@ -1,8 +1,9 @@
-package hu.bearmaster.shopping.dal;
+package hu.bearmaster.shopping.dal.jooq;
 
 import static hu.bearmaster.shopping.dal.jooq.Shoppingdemo.SHOPPINGDEMO;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.jooq.Record;
@@ -24,10 +25,11 @@ public class MyRecordMapperProvider implements RecordMapperProvider {
     private static final Map<Class<?>, RecordMapper<?, ?>> MAPPERS;
 
     static {
-        MAPPERS = Collections.unmodifiableMap(
-                Map.of(Manufacturer.class, MyRecordMapperProvider::mapManufacturerRecord,
-                        Product.class, MyRecordMapperProvider::mapProductRecord,
-                        Property.class, MyRecordMapperProvider::mapPropertyRecord));
+        Map<Class<?>, RecordMapper<?, ?>> mapper = new HashMap<>();
+        mapper.put(Manufacturer.class, MyRecordMapperProvider::mapManufacturerRecord);
+        mapper.put(Product.class, MyRecordMapperProvider::mapProductRecord);
+        mapper.put(Property.class, MyRecordMapperProvider::mapPropertyRecord);
+        MAPPERS = Collections.unmodifiableMap(mapper);
     }
 
     private static Manufacturer mapManufacturerRecord(Record record) {

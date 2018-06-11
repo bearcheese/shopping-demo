@@ -6,36 +6,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import hu.bearmaster.shopping.dal.ManufacturerRepository;
-import hu.bearmaster.shopping.dal.ProductRepository;
+import hu.bearmaster.shopping.dal.service.ProductService;
 import hu.bearmaster.shopping.model.Manufacturer;
 import hu.bearmaster.shopping.model.Product;
 
 @RestController
 public class ProductController {
 
-    private final ManufacturerRepository manufacturerRepository;
+    private final ProductService productService;
 
-    private final ProductRepository productRepository;
-
-    public ProductController(ManufacturerRepository manufacturerRepository, ProductRepository productRepository) {
-        this.manufacturerRepository = manufacturerRepository;
-        this.productRepository = productRepository;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
+
 
     @GetMapping("products/{id}")
     public Product getProduct(@PathVariable Long id) {
-        return productRepository.findById(id).orElse(null);
+        return productService.findById(id).orElse(null);
     }
 
     @PostMapping("products")
     public Long newProduct(@RequestBody Product product) {
-        return productRepository.save(product).getId().get();
+        return productService.save(product).getId().get();
     }
 
-    @GetMapping("manufacturer/{id}")
-    public Manufacturer getManufacturer(@PathVariable Long id) {
-        return manufacturerRepository.getOne(id);
-    }
+//    @GetMapping("manufacturer/{id}")
+//    public Manufacturer getManufacturer(@PathVariable Long id) {
+//        return manufacturerRepository.getOne(id);
+//    }
 
 }
